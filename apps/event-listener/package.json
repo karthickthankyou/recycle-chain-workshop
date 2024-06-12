@@ -1,0 +1,15 @@
+{
+  "name": "event-listener",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "ethers": "^6.13.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "scripts": {
+    "listen": "npx ts-node index.ts"
+  }
+}
