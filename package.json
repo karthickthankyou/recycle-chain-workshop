@@ -15,7 +15,8 @@
   },
   "devDependencies": {
     "prettier": "^3.3.2",
-    "nx": "19.2.3"
+    "nx": "19.2.3",
+    "husky": "^8.0.0"
   },
   "scripts": {
     "format": "prettier  \"{apps,libs,standalone}/**/*.{ts,tsx,js,json}\" --ignore-path .gitignore",
@@ -23,6 +24,7 @@
     "format:write": "yarn format --write",
     "tsc": "yarn nx run-many -t tsc",
     "lint": "yarn nx run-many -t lint",
-    "validate": "yarn format:write && yarn lint && yarn tsc"
+    "validate": "yarn format:write && yarn lint && yarn tsc",
+    "prepare": "husky install"
   }
 }
