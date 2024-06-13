@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Manufacturer {
+    id        String   @unique
+    timestamp DateTime
+
+    name     String
+    location String
+    contact  String
+
+    products Product[]
+}
+
+model Product {
+    id        String   @unique
+    timestamp DateTime
+
+    name String
+
+    manufacturer   Manufacturer @relation(fields: [manufacturerId], references: [id])
+    manufacturerId String
+
+    productItems ProductItem[]
+    toxicItems   ToxicItem[]
+}
+
+model ToxicItem {
+    id        Int      @id @default(autoincrement())
+    timestamp DateTime
+
+    name   String
+    weight Int
+
+    Product   Product @relation(fields: [productId], references: [id])
+    productId String
+}
+
+model ProductItem {
+    id        String   @unique
+    timestamp DateTime
+
+    product   Product @relation(fields: [productId], references: [id])
+    productId String
+
+    status       ProductStatus
+    transactions Transaction[]
+}
+
+model Transaction {
+    id        Int      @id @default(autoincrement())
+    timestamp DateTime
+
+    productItemId String
+    productItem   ProductItem   @relation(fields: [productItemId], references: [id])
+    status        ProductStatus
+}
+
+enum ProductStatus {
+    MANUFACTURED
+    SOLD
+    RETURNED
+    RECYCLED
+}
