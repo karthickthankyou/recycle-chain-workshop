@@ -8,26 +8,13 @@ type Manufacturer {
   timestamp: DateTime!
   location: String!
   contact: String!
+  products: [Product!]!
 }
 
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
-
-type ProductItem {
-  status: ProductStatus!
-  id: String!
-  timestamp: DateTime!
-  productId: String!
-}
-
-enum ProductStatus {
-  MANUFACTURED
-  SOLD
-  RETURNED
-  RECYCLED
-}
 
 type Product {
   id: String!
@@ -40,12 +27,20 @@ type Product {
   totalCount: Float!
 }
 
-type ToxicItem {
+type ProductItem {
+  status: ProductStatus!
+  id: String!
   timestamp: DateTime!
-  id: Float!
-  name: String!
-  weight: Float!
   productId: String!
+  product: Product!
+  transactions: [Transaction!]!
+}
+
+enum ProductStatus {
+  MANUFACTURED
+  SOLD
+  RETURNED
+  RECYCLED
 }
 
 type Transaction {
@@ -53,6 +48,16 @@ type Transaction {
   id: Float!
   timestamp: DateTime!
   productItemId: String!
+  productItem: ProductItem!
+}
+
+type ToxicItem {
+  timestamp: DateTime!
+  id: Float!
+  name: String!
+  weight: Float!
+  productId: String!
+  product: Product!
 }
 
 type Query {

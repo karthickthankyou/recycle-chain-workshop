@@ -1,4 +1,4 @@
-import { Resolver, Query, Args } from '@nestjs/graphql'
+import { Resolver, Query, Args, ResolveField, Parent } from '@nestjs/graphql'
 import { ToxicItemsService } from './toxic-items.service'
 import { ToxicItem } from './entity/toxic-item.entity'
 import {
@@ -6,6 +6,7 @@ import {
   FindUniqueToxicItemArgs,
 } from './dtos/find.args'
 import { PrismaService } from 'src/common/prisma/prisma.service'
+import { Product } from 'src/models/products/graphql/entity/product.entity'
 
 @Resolver(() => ToxicItem)
 export class ToxicItemsResolver {
@@ -22,5 +23,12 @@ export class ToxicItemsResolver {
   @Query(() => ToxicItem, { name: 'toxicItem' })
   findOne(@Args() args: FindUniqueToxicItemArgs) {
     return this.toxicItemsService.findOne(args)
+  }
+
+  @ResolveField(() => Product)
+  product(@Parent() toxicItem: ToxicItem) {
+    return this.prisma.product.findUnique({
+      where: { id: toxicItem.productId },
+    })
   }
 }
