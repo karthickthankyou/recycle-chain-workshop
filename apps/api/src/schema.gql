@@ -1,0 +1,329 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Manufacturer {
+  id: String!
+  name: String!
+  timestamp: DateTime!
+  location: String!
+  contact: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type ProductItem {
+  status: ProductStatus!
+  id: String!
+  timestamp: DateTime!
+  productId: String!
+}
+
+enum ProductStatus {
+  MANUFACTURED
+  SOLD
+  RETURNED
+  RECYCLED
+}
+
+type Product {
+  id: String!
+  timestamp: DateTime!
+  name: String!
+  manufacturerId: String!
+  manufacturer: Manufacturer!
+  productItems: [ProductItem!]!
+  toxicItems: [ToxicItem!]!
+  totalCount: Float!
+}
+
+type ToxicItem {
+  timestamp: DateTime!
+  id: Float!
+  name: String!
+  weight: Float!
+  productId: String!
+}
+
+type Transaction {
+  status: ProductStatus!
+  id: Float!
+  timestamp: DateTime!
+  productItemId: String!
+}
+
+type Query {
+  manufacturers(distinct: [ManufacturerScalarFieldEnum!], where: ManufacturerWhereInput, orderBy: [ManufacturerOrderByWithRelationInput!], cursor: ManufacturerWhereUniqueInput, take: Float, skip: Float): [Manufacturer!]!
+  manufacturer(where: ManufacturerWhereUniqueInput!): Manufacturer!
+  productItems(distinct: [ProductItemScalarFieldEnum!], where: ProductItemWhereInput, orderBy: [ProductItemOrderByWithRelationInput!], cursor: ProductItemWhereUniqueInput, take: Float, skip: Float): [ProductItem!]!
+  productItem(where: ProductItemWhereUniqueInput!): ProductItem!
+  products(distinct: [ProductScalarFieldEnum!], where: ProductWhereInput, orderBy: [ProductOrderByWithRelationInput!], cursor: ProductWhereUniqueInput, take: Float, skip: Float): [Product!]!
+  product(where: ProductWhereUniqueInput!): Product!
+  toxicItems(distinct: [ToxicItemScalarFieldEnum!], where: ToxicItemWhereInput, orderBy: [ToxicItemOrderByWithRelationInput!], cursor: ToxicItemWhereUniqueInput, take: Float, skip: Float): [ToxicItem!]!
+  toxicItem(where: ToxicItemWhereUniqueInput!): ToxicItem!
+  transactions(distinct: [TransactionScalarFieldEnum!], where: TransactionWhereInput, orderBy: [TransactionOrderByWithRelationInput!], cursor: TransactionWhereUniqueInput, take: Float, skip: Float): [Transaction!]!
+  transaction(where: TransactionWhereUniqueInput!): Transaction!
+}
+
+enum ManufacturerScalarFieldEnum {
+  id
+  timestamp
+  name
+  location
+  contact
+}
+
+input ManufacturerWhereInput {
+  id: StringFilter
+  timestamp: DateTimeFilter
+  name: StringFilter
+  location: StringFilter
+  contact: StringFilter
+  products: ProductListRelationFilter
+  AND: [ManufacturerWhereInput!]
+  OR: [ManufacturerWhereInput!]
+  NOT: [ManufacturerWhereInput!]
+}
+
+input StringFilter {
+  mode: QueryMode
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: String
+}
+
+enum QueryMode {
+  default
+  insensitive
+}
+
+input DateTimeFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+}
+
+input ProductListRelationFilter {
+  every: ProductWhereInput
+  some: ProductWhereInput
+  none: ProductWhereInput
+}
+
+input ProductWhereInput {
+  id: StringFilter
+  timestamp: DateTimeFilter
+  name: StringFilter
+  manufacturerId: StringFilter
+  manufacturer: ManufacturerRelationFilter
+  productItems: ProductItemListRelationFilter
+  toxicItems: ToxicItemListRelationFilter
+  AND: [ProductWhereInput!]
+  OR: [ProductWhereInput!]
+  NOT: [ProductWhereInput!]
+}
+
+input ManufacturerRelationFilter {
+  is: ManufacturerWhereInput
+  isNot: ManufacturerWhereInput
+}
+
+input ProductItemListRelationFilter {
+  every: ProductItemWhereInput
+  some: ProductItemWhereInput
+  none: ProductItemWhereInput
+}
+
+input ProductItemWhereInput {
+  status: ProductStatus
+  id: StringFilter
+  timestamp: DateTimeFilter
+  productId: StringFilter
+  product: ProductRelationFilter
+  transactions: TransactionListRelationFilter
+  AND: [ProductItemWhereInput!]
+  OR: [ProductItemWhereInput!]
+  NOT: [ProductItemWhereInput!]
+}
+
+input ProductRelationFilter {
+  is: ProductWhereInput
+  isNot: ProductWhereInput
+}
+
+input TransactionListRelationFilter {
+  every: TransactionWhereInput
+  some: TransactionWhereInput
+  none: TransactionWhereInput
+}
+
+input TransactionWhereInput {
+  status: ProductStatus
+  id: IntFilter
+  timestamp: DateTimeFilter
+  productItemId: StringFilter
+  productItem: ProductItemRelationFilter
+  AND: [TransactionWhereInput!]
+  OR: [TransactionWhereInput!]
+  NOT: [TransactionWhereInput!]
+}
+
+input IntFilter {
+  equals: Float
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+}
+
+input ProductItemRelationFilter {
+  is: ProductItemWhereInput
+  isNot: ProductItemWhereInput
+}
+
+input ToxicItemListRelationFilter {
+  every: ToxicItemWhereInput
+  some: ToxicItemWhereInput
+  none: ToxicItemWhereInput
+}
+
+input ToxicItemWhereInput {
+  timestamp: DateTimeFilter
+  id: IntFilter
+  name: StringFilter
+  weight: IntFilter
+  productId: StringFilter
+  Product: ProductRelationFilter
+  AND: [ToxicItemWhereInput!]
+  OR: [ToxicItemWhereInput!]
+  NOT: [ToxicItemWhereInput!]
+}
+
+input ManufacturerOrderByWithRelationInput {
+  id: SortOrder
+  timestamp: SortOrder
+  name: SortOrder
+  location: SortOrder
+  contact: SortOrder
+  products: ProductOrderByRelationAggregateInput
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input ProductOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input ManufacturerWhereUniqueInput {
+  id: String!
+}
+
+enum ProductItemScalarFieldEnum {
+  id
+  timestamp
+  productId
+  status
+}
+
+input ProductItemOrderByWithRelationInput {
+  id: SortOrder
+  timestamp: SortOrder
+  productId: SortOrder
+  status: SortOrder
+  product: ProductOrderByWithRelationInput
+  transactions: TransactionOrderByRelationAggregateInput
+}
+
+input ProductOrderByWithRelationInput {
+  id: SortOrder
+  timestamp: SortOrder
+  name: SortOrder
+  manufacturerId: SortOrder
+  manufacturer: ManufacturerOrderByWithRelationInput
+  productItems: ProductItemOrderByRelationAggregateInput
+  toxicItems: ToxicItemOrderByRelationAggregateInput
+}
+
+input ProductItemOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input ToxicItemOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input TransactionOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input ProductItemWhereUniqueInput {
+  id: String!
+}
+
+enum ProductScalarFieldEnum {
+  id
+  timestamp
+  name
+  manufacturerId
+}
+
+input ProductWhereUniqueInput {
+  id: String!
+}
+
+enum ToxicItemScalarFieldEnum {
+  id
+  timestamp
+  name
+  weight
+  productId
+}
+
+input ToxicItemOrderByWithRelationInput {
+  timestamp: SortOrder
+  id: SortOrder
+  name: SortOrder
+  weight: SortOrder
+  productId: SortOrder
+  Product: ProductOrderByWithRelationInput
+}
+
+input ToxicItemWhereUniqueInput {
+  id: Float!
+}
+
+enum TransactionScalarFieldEnum {
+  id
+  timestamp
+  productItemId
+  status
+}
+
+input TransactionOrderByWithRelationInput {
+  id: SortOrder
+  timestamp: SortOrder
+  productItemId: SortOrder
+  status: SortOrder
+  productItem: ProductItemOrderByWithRelationInput
+}
+
+input TransactionWhereUniqueInput {
+  id: Float!
+}
