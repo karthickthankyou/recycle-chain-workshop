@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import './globals.css'
+import '@recycle-chain/ui/src/app/globals.css'
 import { ApolloProvider } from '@recycle-chain/network/src/config/apollo'
 
 const inter = Inter({ subsets: ['latin'] })
