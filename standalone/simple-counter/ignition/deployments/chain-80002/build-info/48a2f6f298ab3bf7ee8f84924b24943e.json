@@ -25,9 +25,7 @@
             "evm.methodIdentifiers",
             "metadata"
           ],
-          "": [
-            "ast"
-          ]
+          "": ["ast"]
         }
       }
     }
@@ -38,9 +36,7 @@
         "ast": {
           "absolutePath": "contracts/SimpleCounter.sol",
           "exportedSymbols": {
-            "SimpleCounter": [
-              46
-            ]
+            "SimpleCounter": [46]
           },
           "id": 47,
           "license": "UNLICENSED",
@@ -48,12 +44,7 @@
           "nodes": [
             {
               "id": 1,
-              "literals": [
-                "solidity",
-                "^",
-                "0.8",
-                ".24"
-              ],
+              "literals": ["solidity", "^", "0.8", ".24"],
               "nodeType": "PragmaDirective",
               "src": "39:24:0"
             },
@@ -65,9 +56,7 @@
               "contractKind": "contract",
               "fullyImplemented": true,
               "id": 46,
-              "linearizedBaseContracts": [
-                46
-              ],
+              "linearizedBaseContracts": [46],
               "name": "SimpleCounter",
               "nameLocation": "150:13:0",
               "nodeType": "ContractDefinition",
@@ -566,10 +555,7 @@
               "scope": 47,
               "src": "141:442:0",
               "usedErrors": [],
-              "usedEvents": [
-                17,
-                21
-              ]
+              "usedEvents": [17, 21]
             }
           ],
           "src": "39:545:0"

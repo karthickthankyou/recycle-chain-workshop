@@ -11,6 +11,7 @@ import { ProductItemsModule } from './models/product-items/product-items.module'
 import { ProductsModule } from './models/products/products.module'
 import { ToxicItemsModule } from './models/toxic-items/toxic-items.module'
 import { TransactionsModule } from './models/transactions/transactions.module'
+import { ResyncModule } from './resync/resync.module'
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { TransactionsModule } from './models/transactions/transactions.module'
     }),
     PrismaModule,
     ListenerModule,
+    ResyncModule,
 
     ManufacturersModule,
     ProductItemsModule,
