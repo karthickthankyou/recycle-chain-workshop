@@ -1,0 +1,11 @@
+{
+  "name": "@recycle-chain/forms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@hookform/resolvers": "^3.6.0",
+    "react-hook-form": "^7.51.5",
+    "zod": "^3.23.8"
+  }
+}

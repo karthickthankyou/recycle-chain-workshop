@@ -1,0 +1,16 @@
+{
+  "name": "@recycle-chain/network",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "codegen": "graphql-codegen --config codegen.ts"
+  },
+  "devDependencies": {
+    "@parcel/watcher": "^2.4.1",
+    "@apollo/client": "^3.10.5",
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/named-operations-object": "^3.0.0",
+    "@graphql-codegen/typed-document-node": "^5.0.7"
+  }
+}
