@@ -4,3 +4,36 @@ query Products {
     name
   }
 }
+
+fragment ManufacturerFields on Manufacturer {
+  id
+  name
+  location
+  contact
+}
+
+query Manufacturers(
+  $skip: Float
+  $take: Float
+  $cursor: ManufacturerWhereUniqueInput
+  $orderBy: [ManufacturerOrderByWithRelationInput!]
+  $where: ManufacturerWhereInput
+  $distinct: [ManufacturerScalarFieldEnum!]
+) {
+  manufacturers(
+    skip: $skip
+    take: $take
+    cursor: $cursor
+    orderBy: $orderBy
+    where: $where
+    distinct: $distinct
+  ) {
+    ...ManufacturerFields
+  }
+}
+
+query Manufacturer($where: ManufacturerWhereUniqueInput!) {
+  manufacturer(where: $where) {
+    ...ManufacturerFields
+  }
+}

@@ -4,8 +4,7 @@ import {
   RecycleChain__factory,
 } from '../../../../standalone/recycle-chain-contract/typechain-types'
 import { ethers } from 'ethers'
-import { trackDynamicFetch } from 'next/dist/server/app-render/dynamic-rendering'
-import { contractAddress } from '../../util/contract'
+import { contractAddress } from '../contract'
 
 declare global {
   interface Window {

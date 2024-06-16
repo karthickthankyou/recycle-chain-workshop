@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '@recycle-chain/ui/src/app/globals.css'
 import { ApolloProvider } from '@recycle-chain/network/src/config/apollo'
+import { Header } from '@recycle-chain/ui/src/components/organisms/Header'
+import { Container } from '@recycle-chain/ui/src/components/atoms/Container'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,7 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ApolloProvider>
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <Header />
+          <Container>{children}</Container>
+        </body>
       </ApolloProvider>
     </html>
   )

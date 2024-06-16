@@ -10,12 +10,17 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.0.4",
+    "@react-spring/web": "^9.7.3",
+    "@recycle-chain/forms": "*",
+    "@recycle-chain/util": "*",
     "@tabler/icons-react": "^3.6.0",
+    "d3": "^7.9.0",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/d3": "^7.4.3",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

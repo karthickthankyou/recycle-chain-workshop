@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 export const schemaRegisterManufacturer = z.object({
-  name: z.string().min(1),
-  location: z.string().min(1),
-  contact: z.string().optional(),
+  name: z.string().min(1, { message: 'Name is required' }),
+  location: z.string().min(1, { message: 'Location is required' }),
+  contact: z.string().min(1, { message: 'Contact is required' }),
 })
 
 export type FormTypeRegisterManufacturer = z.infer<
