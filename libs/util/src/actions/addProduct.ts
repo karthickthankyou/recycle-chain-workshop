@@ -14,6 +14,6 @@ export async function addProduct({
     return receipt?.status === 1
   } catch (error) {
     console.error(error)
-    throw error
+    return false
   }
 }

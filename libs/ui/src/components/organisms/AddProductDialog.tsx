@@ -14,6 +14,7 @@ import { addProduct } from '@recycle-chain/util/src/actions/addProduct'
 import { useAccount } from '@recycle-chain/util/src/hooks/ether'
 import { useApolloClient } from '@apollo/client'
 import { namedOperations } from '@recycle-chain/network/src/gql/generated'
+import { toast } from '../molecules/Toast'
 
 const AddProductContent = () => {
   const [open, setOpen] = useState(false)
@@ -48,7 +49,7 @@ const AddProductContent = () => {
               return
             }
 
-            setLoading(false)
+            setLoading(true)
             const status = await addProduct({
               contract,
               payload: { name: data.name, toxicNames, toxicWeights },
@@ -59,9 +60,11 @@ const AddProductContent = () => {
                 include: [namedOperations.Query.Products],
               })
               setOpen(false)
-              alert('Product created successfully.')
+              toast('Product created successfully.')
+            } else {
+              toast('Product creation failed.')
             }
-            setLoading(true)
+            setLoading(false)
           })}
         >
           <HtmlLabel title="Name" error={errors.name?.message}>

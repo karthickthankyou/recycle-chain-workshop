@@ -11,6 +11,7 @@ import { ShowData } from '../organisms/ShowData'
 import { ProductItemCard } from '../organisms/ProductItemCard'
 import { AddProductItems } from '../organisms/AddProductItemsDialog'
 import { useAccount } from '@recycle-chain/util/src/hooks/ether'
+import { BulkStatusUpdateDialog } from '../organisms/BulkStatusUpdateDialog'
 
 export const ShowProductItems = ({ productId }: { productId: string }) => {
   const { setSkip, setTake, skip, take } = useTakeSkip(0, 12)
@@ -50,10 +51,10 @@ export const ShowProductItems = ({ productId }: { productId: string }) => {
         </div>
         <div>
           {isOwner ? (
-            <>
-              {' '}
+            <div className="flex gap-2">
               <AddProductItems productId={productId} />
-            </>
+              <BulkStatusUpdateDialog />
+            </div>
           ) : null}
         </div>
       </div>
@@ -69,7 +70,7 @@ export const ShowProductItems = ({ productId }: { productId: string }) => {
         }}
       >
         {data?.productItems?.map((item) => (
-          <ProductItemCard key={item.id} productItem={item} />
+          <ProductItemCard key={item.id} productItem={item} isOwner={isOwner} />
         ))}
       </ShowData>
     </div>

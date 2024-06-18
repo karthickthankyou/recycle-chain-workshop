@@ -9,6 +9,7 @@ import { HtmlLabel } from '../atoms/HtmlLabel'
 import { HtmlInput } from '../atoms/HtmlInput'
 import { addProductItems } from '@recycle-chain/util/src/actions/addProductItems'
 import { namedOperations } from '@recycle-chain/network/src/gql/generated'
+import { toast } from '../molecules/Toast'
 
 export interface IAddProductItemsDialogProps {
   productId: string
@@ -39,7 +40,7 @@ export const AddProductItems = ({ productId }: IAddProductItemsDialogProps) => {
       <Dialog open={open} setOpen={setOpen} title={'Add product items'}>
         <Form
           onSubmit={handleSubmit(async ({ quantity }) => {
-            setLoading(false)
+            setLoading(true)
 
             if (!contract) {
               alert('Invalid contract.')
@@ -60,9 +61,11 @@ export const AddProductItems = ({ productId }: IAddProductItemsDialogProps) => {
                 ],
               })
               setOpen(false)
-              alert('Product items created successfully.')
+              toast('Product items created successfully.')
+            } else {
+              toast('Product items creation failed.')
             }
-            setLoading(true)
+            setLoading(false)
           })}
         >
           <div className="text-lg font-semibold  ">Product #{productId}</div>

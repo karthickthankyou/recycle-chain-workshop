@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import '@recycle-chain/ui/src/app/globals.css'
 import { ApolloProvider } from '@recycle-chain/network/src/config/apollo'
 import { Header } from '@recycle-chain/ui/src/components/organisms/Header'
+import { ToastContainer } from '@recycle-chain/ui/src/components/molecules/Toast'
 import { Container } from '@recycle-chain/ui/src/components/atoms/Container'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -23,6 +24,7 @@ export default function RootLayout({
         <body className={`${inter.className} bg-gray-25`}>
           <Header />
           <Container>{children}</Container>
+          <ToastContainer />
         </body>
       </ApolloProvider>
     </html>
