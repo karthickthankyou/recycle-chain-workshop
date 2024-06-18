@@ -9,6 +9,11 @@ type Manufacturer {
   location: String!
   contact: String!
   products: [Product!]!
+  totalCount: Float!
+  soldCount: Float!
+  returnedCount: Float!
+  recycledCount: Float!
+  productsCount: Float!
 }
 
 """
@@ -63,6 +68,7 @@ type ToxicItem {
 type Query {
   manufacturers(distinct: [ManufacturerScalarFieldEnum!], where: ManufacturerWhereInput, orderBy: [ManufacturerOrderByWithRelationInput!], cursor: ManufacturerWhereUniqueInput, take: Float, skip: Float): [Manufacturer!]!
   manufacturer(where: ManufacturerWhereUniqueInput!): Manufacturer!
+  manufacturersCount(where: ManufacturerWhereInput): Float!
   productItems(distinct: [ProductItemScalarFieldEnum!], where: ProductItemWhereInput, orderBy: [ProductItemOrderByWithRelationInput!], cursor: ProductItemWhereUniqueInput, take: Float, skip: Float): [ProductItem!]!
   productItem(where: ProductItemWhereUniqueInput!): ProductItem!
   products(distinct: [ProductScalarFieldEnum!], where: ProductWhereInput, orderBy: [ProductOrderByWithRelationInput!], cursor: ProductWhereUniqueInput, take: Float, skip: Float): [Product!]!

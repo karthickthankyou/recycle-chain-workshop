@@ -55,7 +55,12 @@ export type Manufacturer = {
   location: Scalars['String']['output']
   name: Scalars['String']['output']
   products: Array<Product>
+  productsCount: Scalars['Float']['output']
+  recycledCount: Scalars['Float']['output']
+  returnedCount: Scalars['Float']['output']
+  soldCount: Scalars['Float']['output']
   timestamp: Scalars['DateTime']['output']
+  totalCount: Scalars['Float']['output']
 }
 
 export type ManufacturerOrderByWithRelationInput = {
@@ -225,6 +230,7 @@ export type Query = {
   __typename?: 'Query'
   manufacturer: Manufacturer
   manufacturers: Array<Manufacturer>
+  manufacturersCount: Scalars['Float']['output']
   product: Product
   productItem: ProductItem
   productItems: Array<ProductItem>
@@ -245,6 +251,10 @@ export type QueryManufacturersArgs = {
   orderBy?: InputMaybe<Array<ManufacturerOrderByWithRelationInput>>
   skip?: InputMaybe<Scalars['Float']['input']>
   take?: InputMaybe<Scalars['Float']['input']>
+  where?: InputMaybe<ManufacturerWhereInput>
+}
+
+export type QueryManufacturersCountArgs = {
   where?: InputMaybe<ManufacturerWhereInput>
 }
 
@@ -440,6 +450,12 @@ export type ManufacturerFieldsFragment = {
   name: string
   location: string
   contact: string
+  timestamp: any
+  totalCount: number
+  soldCount: number
+  returnedCount: number
+  recycledCount: number
+  productsCount: number
 }
 
 export type ManufacturersQueryVariables = Exact<{
@@ -451,19 +467,23 @@ export type ManufacturersQueryVariables = Exact<{
     | ManufacturerOrderByWithRelationInput
   >
   where?: InputMaybe<ManufacturerWhereInput>
-  distinct?: InputMaybe<
-    Array<ManufacturerScalarFieldEnum> | ManufacturerScalarFieldEnum
-  >
 }>
 
 export type ManufacturersQuery = {
   __typename?: 'Query'
+  manufacturersCount: number
   manufacturers: Array<{
     __typename?: 'Manufacturer'
     id: string
     name: string
     location: string
     contact: string
+    timestamp: any
+    totalCount: number
+    soldCount: number
+    returnedCount: number
+    recycledCount: number
+    productsCount: number
   }>
 }
 
@@ -479,6 +499,12 @@ export type ManufacturerQuery = {
     name: string
     location: string
     contact: string
+    timestamp: any
+    totalCount: number
+    soldCount: number
+    returnedCount: number
+    recycledCount: number
+    productsCount: number
   }
 }
 
@@ -509,6 +535,12 @@ export const ManufacturerFieldsFragmentDoc = {
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
           { kind: 'Field', name: { kind: 'Name', value: 'location' } },
           { kind: 'Field', name: { kind: 'Name', value: 'contact' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'timestamp' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'totalCount' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'soldCount' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'returnedCount' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'recycledCount' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'productsCount' } },
         ],
       },
     },
@@ -600,23 +632,6 @@ export const ManufacturersDocument = {
             name: { kind: 'Name', value: 'ManufacturerWhereInput' },
           },
         },
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'distinct' },
-          },
-          type: {
-            kind: 'ListType',
-            type: {
-              kind: 'NonNullType',
-              type: {
-                kind: 'NamedType',
-                name: { kind: 'Name', value: 'ManufacturerScalarFieldEnum' },
-              },
-            },
-          },
-        },
       ],
       selectionSet: {
         kind: 'SelectionSet',
@@ -665,14 +680,6 @@ export const ManufacturersDocument = {
                   name: { kind: 'Name', value: 'where' },
                 },
               },
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'distinct' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'distinct' },
-                },
-              },
             ],
             selectionSet: {
               kind: 'SelectionSet',
@@ -683,6 +690,20 @@ export const ManufacturersDocument = {
                 },
               ],
             },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'manufacturersCount' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'where' },
+                },
+              },
+            ],
           },
         ],
       },
@@ -701,6 +722,12 @@ export const ManufacturersDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
           { kind: 'Field', name: { kind: 'Name', value: 'location' } },
           { kind: 'Field', name: { kind: 'Name', value: 'contact' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'timestamp' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'totalCount' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'soldCount' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'returnedCount' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'recycledCount' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'productsCount' } },
         ],
       },
     },
@@ -772,6 +799,12 @@ export const ManufacturerDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
           { kind: 'Field', name: { kind: 'Name', value: 'location' } },
           { kind: 'Field', name: { kind: 'Name', value: 'contact' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'timestamp' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'totalCount' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'soldCount' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'returnedCount' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'recycledCount' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'productsCount' } },
         ],
       },
     },

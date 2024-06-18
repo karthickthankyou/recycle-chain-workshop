@@ -25,7 +25,6 @@ export const CustomDonutChart = ({ data }: IDonutChartProps) => {
 
     const arcs = calculateArcs(data)
 
-    console.log('arcs', arcs)
     return arcs
   }, [data])
 
@@ -40,10 +39,8 @@ export const CustomDonutChart = ({ data }: IDonutChartProps) => {
     .outerRadius(radius)
     .cornerRadius(2)
 
-  console.log('arcGenerator ', arcGenerator)
-
   return (
-    <div className="relative bg-gray-50">
+    <div className="relative  ">
       <svg
         viewBox={`${-strokeWidth / 2} ${-strokeWidth / 2} ${diameter + strokeWidth} ${diameter - 25}`}
       >

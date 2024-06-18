@@ -10,6 +10,13 @@ fragment ManufacturerFields on Manufacturer {
   name
   location
   contact
+  timestamp
+
+  totalCount
+  soldCount
+  returnedCount
+  recycledCount
+  productsCount
 }
 
 query Manufacturers(
@@ -18,7 +25,6 @@ query Manufacturers(
   $cursor: ManufacturerWhereUniqueInput
   $orderBy: [ManufacturerOrderByWithRelationInput!]
   $where: ManufacturerWhereInput
-  $distinct: [ManufacturerScalarFieldEnum!]
 ) {
   manufacturers(
     skip: $skip
@@ -26,10 +32,10 @@ query Manufacturers(
     cursor: $cursor
     orderBy: $orderBy
     where: $where
-    distinct: $distinct
   ) {
     ...ManufacturerFields
   }
+  manufacturersCount(where: $where)
 }
 
 query Manufacturer($where: ManufacturerWhereUniqueInput!) {

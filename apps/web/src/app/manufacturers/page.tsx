@@ -1,8 +1,7 @@
 'use client'
-import { useQuery } from '@apollo/client'
-import { ManufacturersDocument } from '@recycle-chain/network/src/gql/generated'
+
+import { AllManufacturers } from '@recycle-chain/ui/src/components/templates/AllManufacturers'
 
 export default function Page() {
-  const { data } = useQuery(ManufacturersDocument)
-  return <pre>Manufacuters {JSON.stringify(data, null, 2)}</pre>
+  return <AllManufacturers />
 }

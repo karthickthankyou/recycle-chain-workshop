@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ApolloProvider>
-        <body className={inter.className}>
+        <body className={`${inter.className} bg-gray-25`}>
           <Header />
           <Container>{children}</Container>
         </body>
