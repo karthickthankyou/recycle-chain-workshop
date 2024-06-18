@@ -13,8 +13,6 @@ export const ManufacturerRegisterButton = () => {
     variables: { where: { id: account } },
   })
 
-  console.log('data ', data, account)
-
   if (!data?.manufacturer) {
     return <StyledLink href="/manufacturers/register">Register</StyledLink>
   }

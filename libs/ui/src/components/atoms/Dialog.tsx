@@ -63,7 +63,7 @@ export const Dialog = ({
               leaveTo="opacity-0 scale-95"
             >
               <DialogPanel
-                className={`w-full  p-4 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl ${widthClassName}`}
+                className={`w-full rounded p-4 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl ${widthClassName}`}
               >
                 <button
                   type="button"

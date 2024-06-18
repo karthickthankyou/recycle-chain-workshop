@@ -13,7 +13,9 @@ export class ManufacturersService {
     return this.prisma.manufacturer.findMany(args)
   }
 
-  findOne(args: FindUniqueManufacturerArgs) {
-    return this.prisma.manufacturer.findUnique(args)
+  findOne({ where: { id } }: FindUniqueManufacturerArgs) {
+    return this.prisma.manufacturer.findFirst({
+      where: { id: { equals: id, mode: 'insensitive' } },
+    })
   }
 }

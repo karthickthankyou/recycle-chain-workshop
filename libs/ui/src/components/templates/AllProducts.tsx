@@ -12,6 +12,7 @@ import { useTakeSkip } from '@recycle-chain/util/src/hooks/pagination'
 import { useState } from 'react'
 import { IconSearch } from '@tabler/icons-react'
 import { ShowData } from '@recycle-chain/ui/src/components/organisms/ShowData'
+import { AddProductDialog } from '../organisms/AddProductDialog'
 
 export const AllProducts = ({
   manufacturerId,
@@ -44,7 +45,7 @@ export const AllProducts = ({
     <div>
       <div className="flex justify-between items-baseline gap-2 w-full">
         <PageTitle>All products</PageTitle>
-        {showCreateProductDialog ? <div>Create product</div> : null}
+        {showCreateProductDialog ? <AddProductDialog /> : null}
       </div>
       <div className=" mb-3">
         <div className="flex max-w-sm items-center gap-2 shadow-xl bg-white px-4 rounded">
