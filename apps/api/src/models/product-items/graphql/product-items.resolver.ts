@@ -8,6 +8,7 @@ import {
 import { PrismaService } from 'src/common/prisma/prisma.service'
 import { Product } from 'src/models/products/graphql/entity/product.entity'
 import { Transaction } from 'src/models/transactions/graphql/entity/transaction.entity'
+import { ProductItemWhereInput } from './dtos/where.args'
 
 @Resolver(() => ProductItem)
 export class ProductItemsResolver {
@@ -38,5 +39,13 @@ export class ProductItemsResolver {
     return this.prisma.transaction.findMany({
       where: { productItemId: productItem.id },
     })
+  }
+
+  @Query(() => Number, { name: 'productItemsCount' })
+  async productItemsCount(
+    @Args('where', { nullable: true })
+    where: ProductItemWhereInput,
+  ) {
+    return this.prisma.productItem.count({ where })
   }
 }

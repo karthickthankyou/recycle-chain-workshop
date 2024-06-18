@@ -70,6 +70,7 @@ type Query {
   manufacturersCount(where: ManufacturerWhereInput): Float!
   productItems(distinct: [ProductItemScalarFieldEnum!], where: ProductItemWhereInput, orderBy: [ProductItemOrderByWithRelationInput!], cursor: ProductItemWhereUniqueInput, take: Float, skip: Float): [ProductItem!]!
   productItem(where: ProductItemWhereUniqueInput!): ProductItem!
+  productItemsCount(where: ProductItemWhereInput): Float!
   products(distinct: [ProductScalarFieldEnum!], where: ProductWhereInput, orderBy: [ProductOrderByWithRelationInput!], cursor: ProductWhereUniqueInput, take: Float, skip: Float): [Product!]!
   product(where: ProductWhereUniqueInput!): Product!
   productsCount(where: ProductWhereInput): Float!
