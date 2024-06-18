@@ -2,11 +2,9 @@
 import { useQuery } from '@apollo/client'
 import { ManufacturerDocument } from '@recycle-chain/network/src/gql/generated'
 import { AlertSection } from '@recycle-chain/ui/src/components/molecules/AlertSection'
+import { LoaderPanel } from '@recycle-chain/ui/src/components/molecules/Loader'
 import { ManufacturerRegisterButton } from '@recycle-chain/ui/src/components/molecules/ManufacturerRegisterButton'
-import { NoItemsFound } from '@recycle-chain/ui/src/components/molecules/NoItemsFound'
-import { StyledLink } from '@recycle-chain/ui/src/components/molecules/StyledLink'
 import { ManufacturerTopCard } from '@recycle-chain/ui/src/components/organisms/ManufacturerTopCard'
-import Link from 'next/link'
 export default function Layout({
   children,
   params,
@@ -14,9 +12,13 @@ export default function Layout({
   children: React.ReactNode
   params: { manufacturerId: string }
 }) {
-  const { data } = useQuery(ManufacturerDocument, {
+  const { data, loading } = useQuery(ManufacturerDocument, {
     variables: { where: { id: params.manufacturerId } },
   })
+
+  if (loading) {
+    return <LoaderPanel />
+  }
 
   console.log('layout ', data)
 
@@ -31,6 +33,7 @@ export default function Layout({
   return (
     <main>
       <ManufacturerTopCard manufacturer={data?.manufacturer} className="mb-4" />
+      {children}
     </main>
   )
 }

@@ -5,6 +5,7 @@ import { PageTitle } from '../atoms/PageTitle'
 import { ManufacturerRegisterButton } from '../molecules/ManufacturerRegisterButton'
 import { ShowData } from '../organisms/ShowData'
 import { ManufacturerCard } from '../organisms/ManufacturerCard'
+import { LoaderPanel } from '../molecules/Loader'
 
 export const AllManufacturers = () => {
   const { setSkip, setTake, skip, take } = useTakeSkip()
@@ -12,6 +13,10 @@ export const AllManufacturers = () => {
   const { loading, data, error } = useQuery(ManufacturersDocument, {
     variables: { skip, take },
   })
+
+  if (loading) {
+    return <LoaderPanel />
+  }
 
   return (
     <div>

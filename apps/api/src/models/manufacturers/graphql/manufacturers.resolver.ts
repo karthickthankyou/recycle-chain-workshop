@@ -54,37 +54,16 @@ export class ManufacturersResolver {
   }
 
   @ResolveField(() => Number, {
-    name: 'soldCount',
+    name: 'getCountPerStatus',
   })
-  async soldCount(@Parent() manufacturer: Manufacturer) {
+  async getCountPerStatus(
+    @Parent() parent: Manufacturer,
+    @Args('status', { type: () => ProductStatus }) status: ProductStatus,
+  ) {
     return this.prisma.productItem.count({
       where: {
-        status: ProductStatus.SOLD,
-        product: { manufacturerId: manufacturer.id },
-      },
-    })
-  }
-
-  @ResolveField(() => Number, {
-    name: 'returnedCount',
-  })
-  async returnedCount(@Parent() manufacturer: Manufacturer) {
-    return this.prisma.productItem.count({
-      where: {
-        status: ProductStatus.RETURNED,
-        product: { manufacturerId: manufacturer.id },
-      },
-    })
-  }
-
-  @ResolveField(() => Number, {
-    name: 'recycledCount',
-  })
-  async recycledCount(@Parent() manufacturer: Manufacturer) {
-    return this.prisma.productItem.count({
-      where: {
-        status: ProductStatus.RECYCLED,
-        product: { manufacturerId: manufacturer.id },
+        status,
+        product: { manufacturerId: parent.id },
       },
     })
   }

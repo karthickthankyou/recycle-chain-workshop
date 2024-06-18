@@ -1,10 +1,3 @@
-query Products {
-  products {
-    id
-    name
-  }
-}
-
 fragment ManufacturerFields on Manufacturer {
   id
   name
@@ -13,9 +6,9 @@ fragment ManufacturerFields on Manufacturer {
   timestamp
 
   totalCount
-  soldCount
-  returnedCount
-  recycledCount
+  soldCount: getCountPerStatus(status: SOLD)
+  returnedCount: getCountPerStatus(status: RETURNED)
+  recycledCount: getCountPerStatus(status: RECYCLED)
   productsCount
 }
 
@@ -42,4 +35,40 @@ query Manufacturer($where: ManufacturerWhereUniqueInput!) {
   manufacturer(where: $where) {
     ...ManufacturerFields
   }
+}
+
+query Products(
+  $skip: Float
+  $take: Float
+  $cursor: ProductWhereUniqueInput
+  $orderBy: [ProductOrderByWithRelationInput!]
+  $where: ProductWhereInput
+  $distinct: [ProductScalarFieldEnum!]
+) {
+  products(
+    skip: $skip
+    take: $take
+    cursor: $cursor
+    orderBy: $orderBy
+    where: $where
+    distinct: $distinct
+  ) {
+    id
+    name
+    timestamp
+    totalCount
+    soldCount: getCountPerStatus(status: SOLD)
+    returnedCount: getCountPerStatus(status: RETURNED)
+    recycledCount: getCountPerStatus(status: RECYCLED)
+    manufacturer {
+      name
+    }
+    toxicItems {
+      id
+      name
+      timestamp
+      weight
+    }
+  }
+  productsCount(where: $where)
 }
