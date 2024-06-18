@@ -95,6 +95,17 @@ query Product($where: ProductWhereUniqueInput!) {
   }
 }
 
+query ProductManufacturer($where: ProductWhereUniqueInput!) {
+  product(where: $where) {
+    id
+
+    manufacturerId
+    manufacturer {
+      name
+    }
+  }
+}
+
 query ProductItems(
   $skip: Float
   $take: Float

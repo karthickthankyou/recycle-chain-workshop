@@ -1,15 +1,25 @@
 import { useQuery } from '@apollo/client'
-import { ProductItemsDocument } from '@recycle-chain/network/src/gql/generated'
+import {
+  ProductItemsDocument,
+  ProductManufacturerDocument,
+} from '@recycle-chain/network/src/gql/generated'
 import { useTakeSkip } from '@recycle-chain/util/src/hooks/pagination'
 import { useState } from 'react'
 import { PageTitle } from '../atoms/PageTitle'
 import { IconSearch } from '@tabler/icons-react'
 import { ShowData } from '../organisms/ShowData'
 import { ProductItemCard } from '../organisms/ProductItemCard'
+import { AddProductItems } from '../organisms/AddProductItemsDialog'
+import { useAccount } from '@recycle-chain/util/src/hooks/ether'
 
 export const ShowProductItems = ({ productId }: { productId: string }) => {
   const { setSkip, setTake, skip, take } = useTakeSkip(0, 12)
   const [searchTerm, setSearchTerm] = useState('')
+
+  const { account } = useAccount()
+  const { data: productData } = useQuery(ProductManufacturerDocument, {
+    variables: { where: { id: productId } },
+  })
 
   const { loading, data } = useQuery(ProductItemsDocument, {
     variables: {
@@ -21,6 +31,9 @@ export const ShowProductItems = ({ productId }: { productId: string }) => {
       },
     },
   })
+
+  const isOwner =
+    account.toLowerCase() === productData?.product.manufacturerId.toLowerCase()
 
   return (
     <div>
@@ -36,7 +49,12 @@ export const ShowProductItems = ({ productId }: { productId: string }) => {
           />
         </div>
         <div>
-          {/* Todo: if the viewer is the owner, add and modify items */}
+          {isOwner ? (
+            <>
+              {' '}
+              <AddProductItems productId={productId} />
+            </>
+          ) : null}
         </div>
       </div>
       <ShowData
