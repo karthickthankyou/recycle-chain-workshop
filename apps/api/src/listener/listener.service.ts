@@ -1,9 +1,6 @@
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
 import { ethers } from 'ethers'
-import {
-  RecycleChain,
-  RecycleChain__factory,
-} from '../../../../standalone/recycle-chain-contract/typechain-types'
+import { RecycleChain, RecycleChain__factory } from '../common/typechain-types'
 import { contractAddress } from 'src/common/util'
 import { PrismaService } from 'src/common/prisma/prisma.service'
 import { ProductStatus } from '@prisma/client'

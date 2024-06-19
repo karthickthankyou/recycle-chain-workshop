@@ -5,6 +5,5 @@
   "compilerOptions": {
     "deleteOutDir": true,
     "plugins": [{ "name": "@nestjs/graphql" }]
-  },
-  "entryFile": "./apps/api/src/main"
+  }
 }
