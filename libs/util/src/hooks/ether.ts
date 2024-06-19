@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import {
   RecycleChain,
   RecycleChain__factory,
-} from '../../../../standalone/recycle-chain-contract/typechain-types'
+} from '../generated/typechain-types'
 import { ethers } from 'ethers'
 import { contractAddress } from '../contract'
 
