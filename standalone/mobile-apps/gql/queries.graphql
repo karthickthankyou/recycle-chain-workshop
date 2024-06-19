@@ -1,0 +1,104 @@
+query ProductItems(
+  $skip: Float
+  $take: Float
+  $cursor: ProductItemWhereUniqueInput
+  $orderBy: [ProductItemOrderByWithRelationInput!]
+  $where: ProductItemWhereInput
+  $distinct: [ProductItemScalarFieldEnum!]
+) {
+  productItems(
+    skip: $skip
+    take: $take
+    cursor: $cursor
+    orderBy: $orderBy
+    where: $where
+    distinct: $distinct
+  ) {
+    id
+    status
+    timestamp
+    product {
+      name
+    }
+    transactions {
+      timestamp
+      status
+    }
+  }
+  productItemsCount(where: $where)
+}
+
+fragment ManufacturerFields on Manufacturer {
+  id
+  name
+  location
+  contact
+  timestamp
+
+  totalCount
+  soldCount: getCountPerStatus(status: SOLD)
+  returnedCount: getCountPerStatus(status: RETURNED)
+  recycledCount: getCountPerStatus(status: RECYCLED)
+  productsCount
+}
+
+query Manufacturers(
+  $skip: Float
+  $take: Float
+  $cursor: ManufacturerWhereUniqueInput
+  $orderBy: [ManufacturerOrderByWithRelationInput!]
+  $where: ManufacturerWhereInput
+) {
+  manufacturers(
+    skip: $skip
+    take: $take
+    cursor: $cursor
+    orderBy: $orderBy
+    where: $where
+  ) {
+    ...ManufacturerFields
+  }
+  manufacturersCount(where: $where)
+}
+
+query Manufacturer($where: ManufacturerWhereUniqueInput!) {
+  manufacturer(where: $where) {
+    ...ManufacturerFields
+  }
+}
+
+query Products(
+  $skip: Float
+  $take: Float
+  $cursor: ProductWhereUniqueInput
+  $orderBy: [ProductOrderByWithRelationInput!]
+  $where: ProductWhereInput
+  $distinct: [ProductScalarFieldEnum!]
+) {
+  products(
+    skip: $skip
+    take: $take
+    cursor: $cursor
+    orderBy: $orderBy
+    where: $where
+    distinct: $distinct
+  ) {
+    id
+    name
+    timestamp
+    totalCount
+    soldCount: getCountPerStatus(status: SOLD)
+    returnedCount: getCountPerStatus(status: RETURNED)
+    recycledCount: getCountPerStatus(status: RECYCLED)
+    manufacturer {
+      name
+    }
+    toxicItems {
+      id
+      name
+      timestamp
+      weight
+    }
+  }
+  productsCount(where: $where)
+}
