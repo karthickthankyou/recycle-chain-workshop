@@ -102,3 +102,89 @@ query Products(
   }
   productsCount(where: $where)
 }
+
+query Product($where: ProductWhereUniqueInput!) {
+  product(where: $where) {
+    id
+    name
+    soldCount: getCountPerStatus(status: SOLD)
+    returnedCount: getCountPerStatus(status: RETURNED)
+    recycledCount: getCountPerStatus(status: RECYCLED)
+    timestamp
+    totalCount
+    manufacturerId
+    manufacturer {
+      name
+    }
+    toxicItems {
+      weight
+      timestamp
+      name
+      id
+    }
+  }
+}
+
+query ProductItems(
+  $skip: Float
+  $take: Float
+  $cursor: ProductItemWhereUniqueInput
+  $orderBy: [ProductItemOrderByWithRelationInput!]
+  $where: ProductItemWhereInput
+  $distinct: [ProductItemScalarFieldEnum!]
+) {
+  productItems(
+    skip: $skip
+    take: $take
+    cursor: $cursor
+    orderBy: $orderBy
+    where: $where
+    distinct: $distinct
+  ) {
+    id
+    status
+    timestamp
+    product {
+      name
+    }
+    transactions {
+      timestamp
+      status
+    }
+  }
+  productItemsCount(where: $where)
+}
+
+query Transactions(
+  $skip: Float
+  $take: Float
+  $cursor: TransactionWhereUniqueInput
+  $orderBy: [TransactionOrderByWithRelationInput!]
+  $where: TransactionWhereInput
+  $distinct: [TransactionScalarFieldEnum!]
+) {
+  transactions(
+    skip: $skip
+    take: $take
+    cursor: $cursor
+    orderBy: $orderBy
+    where: $where
+    distinct: $distinct
+  ) {
+    status
+    productItemId
+    timestamp
+    id
+    productItem {
+      product {
+        name
+      }
+    }
+  }
+}
+
+query Manufacturer($where: ManufacturerWhereUniqueInput!) {
+  manufacturer(where: $where) {
+    ...ManufacturerFields
+  }
+}

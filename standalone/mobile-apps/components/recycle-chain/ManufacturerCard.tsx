@@ -1,5 +1,6 @@
 import { ManufacturersQuery } from '@/gql/generated'
-import { View, Text, StyleSheet } from 'react-native'
+import { useRouter } from 'expo-router'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 interface ManufacturerCardProps {
   manufacturer: ManufacturersQuery['manufacturers'][0]
@@ -8,12 +9,20 @@ interface ManufacturerCardProps {
 export const ManufacturerCard: React.FC<ManufacturerCardProps> = ({
   manufacturer,
 }) => {
+  const router = useRouter()
+
   return (
-    <View style={styles.card}>
-      <Text style={styles.title}>{manufacturer.name}</Text>
-      <Text style={styles.description}>{manufacturer.location}</Text>
-      <Text style={styles.description}>{manufacturer.contact}</Text>
-    </View>
+    <TouchableOpacity
+      onPress={() =>
+        router.push(`/manufacturer?manufacturerId=${manufacturer.id}`)
+      }
+    >
+      <View style={styles.card}>
+        <Text style={styles.title}>{manufacturer.name}</Text>
+        <Text style={styles.description}>{manufacturer.location}</Text>
+        <Text style={styles.description}>{manufacturer.contact}</Text>
+      </View>
+    </TouchableOpacity>
   )
 }
 

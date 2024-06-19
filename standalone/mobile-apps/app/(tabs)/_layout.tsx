@@ -8,7 +8,7 @@ import { useColorScheme } from '@/components/useColorScheme'
 import { useClientOnlyValue } from '@/components/useClientOnlyValue'
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
+export function Icon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name']
   color: string
 }) {
@@ -31,9 +31,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Products',
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="suitcase" color={color} />
-          ),
+          tabBarIcon: ({ color }) => <Icon name="suitcase" color={color} />,
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
@@ -54,9 +52,7 @@ export default function TabLayout() {
         name="two"
         options={{
           title: 'Manufacturers',
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="building-o" color={color} />
-          ),
+          tabBarIcon: ({ color }) => <Icon name="building-o" color={color} />,
         }}
       />
     </Tabs>
