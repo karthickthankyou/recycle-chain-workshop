@@ -51,7 +51,8 @@ export class ListenerService implements OnModuleInit, OnModuleDestroy {
       this.contract.on(
         this.contract.filters.ManufacturerRegistered,
         async (id, name, location, contact, event) => {
-          // @ts-expect-error The blockNumber does not exist inside event.blockNumber
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           const blockNumber = event.log.blockNumber
           const timestamp = await this.getBlockTimeStamp(blockNumber)
 
@@ -76,7 +77,8 @@ export class ListenerService implements OnModuleInit, OnModuleDestroy {
       this.contract.on(
         this.contract.filters.ProductCreated,
         async (productId, name, manufacturer, event) => {
-          // @ts-expect-error The blockNumber does not exist inside event.blockNumber
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           const blockNumber = event.log.blockNumber
           const timestamp = await this.getBlockTimeStamp(blockNumber)
 
@@ -97,7 +99,8 @@ export class ListenerService implements OnModuleInit, OnModuleDestroy {
       this.contract.on(
         this.contract.filters.ProductItemsAdded,
         async (productItemIds, productId, event) => {
-          // @ts-expect-error The blockNumber does not exist inside event.blockNumber
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           const timestamp = await this.getBlockTimeStamp(event.log.blockNumber)
 
           const items = await this.createProductItems({
@@ -118,7 +121,8 @@ export class ListenerService implements OnModuleInit, OnModuleDestroy {
       this.contract.on(
         this.contract.filters.ProductItemsStatusChanged,
         async (productItemIds, statusIndex, event) => {
-          // @ts-expect-error The blockNumber does not exist inside event.blockNumber
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           const timestamp = await this.getBlockTimeStamp(event.log.blockNumber)
 
           await this.updateProductItemStatus({
@@ -140,7 +144,8 @@ export class ListenerService implements OnModuleInit, OnModuleDestroy {
       this.contract.on(
         this.contract.filters.ToxicItemCreated,
         async (productId, name, weight, event) => {
-          // @ts-expect-error The blockNumber does not exist inside event.blockNumber
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           const timestamp = await this.getBlockTimeStamp(event.log.blockNumber)
 
           await this.createToxicItem({
