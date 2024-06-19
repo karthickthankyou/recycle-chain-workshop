@@ -10,6 +10,7 @@
     "tsc": "tsc --noEmit"
   },
   "dependencies": {
+    "@recycle-chain/3d": "*",
     "@recycle-chain/ui": "*",
     "@recycle-chain/network": "*",
     "ethers": "^6.13.0",
